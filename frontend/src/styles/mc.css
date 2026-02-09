@@ -1,0 +1,197 @@
+/* ======================================================
+   Streamlit → React: pixel-parity stylesheet
+   (ported from your Streamlit app.py CSS block)
+   ====================================================== */
+
+/* App background gradient */
+body {
+  margin: 0;
+  background:
+    radial-gradient(1200px 600px at 20% 10%, rgba(0, 126, 230, 0.22), rgba(255, 255, 255, 0) 60%),
+    radial-gradient(900px 500px at 85% 20%, rgba(0, 180, 140, 0.18), rgba(255, 255, 255, 0) 55%),
+    linear-gradient(180deg, #ffffff 0%, #f6f8fb 100%);
+  background-attachment: fixed;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Layout shell (replaces Streamlit containers) */
+.mc-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 1.2rem; /* matches stMainBlockContainer padding tweak */
+  padding-left: 18px;
+  padding-right: 18px;
+  padding-bottom: 18px;
+}
+
+/* Two-column top bar */
+.mc-topbar {
+  display: grid;
+  grid-template-columns: 0.62fr 0.38fr;
+  gap: 14px;
+  align-items: start;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 980px) {
+  .mc-topbar {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Cards */
+.mc-card {
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 14px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.88);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+}
+
+/* Header (matches your HTML) */
+.mc-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 6px 0 18px 0;
+}
+
+.mc-header h1 {
+  font-size: 28px;
+  margin: 0;
+  line-height: 1.15;
+}
+
+.mc-subtitle {
+  color: rgba(0,0,0,0.62);
+  font-size: 14px;
+}
+
+/* KPI number */
+.mc-kpi {
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.mc-kpi-label {
+  font-size: 12px;
+  color: rgba(0,0,0,0.62);
+  margin-top: 6px;
+}
+
+/* Form inputs similar to Streamlit */
+.mc-form {
+  display: grid;
+  gap: 10px;
+}
+
+.mc-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.mc-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 210px;
+}
+
+.mc-label {
+  font-size: 12px;
+  color: rgba(0,0,0,0.62);
+}
+
+select, input {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.15);
+  background: rgba(255,255,255,0.85);
+  outline: none;
+}
+
+/* Section grids (match Streamlit columns feel) */
+.mc-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 980px) {
+  .mc-grid-2 { grid-template-columns: 1fr; }
+}
+
+/* Tables (Streamlit-like) */
+.mc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.mc-table th {
+  text-align: left;
+  padding: 10px 6px;
+  font-size: 11px;
+  color: rgba(0,0,0,0.62);
+  font-weight: 700;
+}
+
+.mc-table td {
+  padding: 10px 6px;
+  border-top: 1px solid rgba(0,0,0,0.08);
+}
+
+/* Small note text */
+.mc-note {
+  font-size: 12px;
+  color: rgba(0,0,0,0.62);
+}
+
+/* Logo sizing */
+.mc-logo {
+  width: 150px;
+  height: auto;
+}
+
+/* ======================================================
+   DARK MODE (automatic) — copied from Streamlit CSS
+   ====================================================== */
+@media (prefers-color-scheme: dark) {
+
+  body {
+    background:
+      radial-gradient(1200px 600px at 20% 10%, rgba(56, 189, 248, 0.18), transparent 60%),
+      radial-gradient(900px 500px at 85% 20%, rgba(34, 197, 94, 0.16), transparent 55%),
+      linear-gradient(180deg, #0b1220 0%, #020617 100%);
+  }
+
+  html, body {
+    color: #e5e7eb;
+  }
+
+  .mc-card {
+    background: rgba(15, 23, 42, 0.92);
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+  }
+
+  select, input {
+    background-color: #020617 !important;
+    color: #e5e7eb !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+  }
+
+  .mc-subtitle,
+  .mc-label,
+  .mc-note,
+  .mc-table th,
+  .mc-kpi-label {
+    color: rgba(229,231,235,0.65) !important;
+  }
+
+  .mc-table td {
+    border-top: 1px solid rgba(255,255,255,0.10);
+  }
+}

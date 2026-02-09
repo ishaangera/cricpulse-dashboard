@@ -1,0 +1,403 @@
+:root{
+  /* Light mode base */
+  --bg:#f6f7fb;
+  --panel:#ffffff;
+  --panel2:#fbfcff;
+  --text:#0f172a;
+  --muted: rgba(15,23,42,0.62);
+  --border: rgba(15,23,42,0.10);
+  --border2: rgba(15,23,42,0.14);
+  --shadow: 0 14px 35px rgba(2,6,23,0.10);
+  --radius: 16px;
+
+  /* neutral accent */
+  --accent:#2563eb;
+
+  /* team section tints (fallback) */
+  --teamA: #2563eb; /* batter default */
+  --teamB: #dc2626; /* bowler default */
+}
+
+*{ box-sizing:border-box; }
+
+html, body{
+  margin:0;
+  padding:0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(1000px 500px at 10% 10%, rgba(37,99,235,0.08), transparent 55%),
+    radial-gradient(900px 450px at 90% 15%, rgba(220,38,38,0.06), transparent 55%),
+    linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
+  background-attachment: fixed;
+}
+
+a{ color: inherit; text-decoration:none; }
+
+/* container width like Streamlit */
+.app{
+  max-width: 1260px;
+  margin: 0 auto;
+  padding: 22px 26px 44px 26px;
+}
+
+/* Top header (logo + title) */
+.headerRow{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.headerLeft{
+  display:flex;
+  align-items:center;
+  gap: 18px;
+}
+
+.logo{
+  width: 168px;
+  height:auto;
+  border-radius: 6px;
+  box-shadow: 0 8px 18px rgba(2,6,23,0.08);
+  background: white;
+}
+
+.hgroup h1{
+  margin:0;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.subtitle{
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* cards */
+.card{
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* TWO distinct top sections (Batter and Bowler) */
+.topSections{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  align-items:stretch;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 980px){
+  .topSections{ grid-template-columns: 1fr; }
+}
+
+.sectionCard{
+  padding: 16px 18px 14px 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* coloured header strip + soft tint */
+.sectionCard::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--sectionColor) 12%, transparent), transparent 55%);
+  pointer-events:none;
+}
+
+.sectionCard::after{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  height: 6px;
+  width: 100%;
+  background: var(--sectionColor);
+  pointer-events:none;
+}
+
+.sectionHeader{
+  position:relative;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap: 10px;
+}
+
+.sectionTitle{
+  margin:0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.sectionSmall{
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* selectors row inside section */
+.fieldLabel{
+  position:relative;
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+select{
+  position:relative;
+  width:100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border2);
+  background: #ffffff;
+  color: var(--text);
+  outline:none;
+}
+
+select:focus{
+  border-color: color-mix(in srgb, var(--sectionColor) 65%, #ffffff);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--sectionColor) 18%, transparent);
+}
+
+/* KPI row */
+.kpiRow{
+  position:relative;
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-top: 12px;
+}
+
+@media (max-width: 980px){
+  .kpiRow{ grid-template-columns: repeat(2, 1fr); }
+}
+
+.kpiValue{
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1.05;
+}
+
+.kpiLabel{
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* RIGHT controls (Over + Ball) now separate card */
+.controlsCard{
+  padding: 14px 16px;
+  margin-bottom: 14px;
+}
+
+.controlLabel{
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+/* Over slider row: value pill + slider */
+.overRow{
+  display:grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items:center;
+  margin-bottom: 16px;
+}
+
+.overPill{
+  border: 1px solid var(--border);
+  background: var(--panel2);
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-weight: 700;
+  min-width: 78px;
+  text-align:center;
+}
+
+/* Custom range style with BAT icon thumb */
+input[type="range"]{
+  width: 100%;
+  height: 6px;
+  appearance: none;
+  background: linear-gradient(90deg,
+    var(--sectionColor) 0%,
+    var(--sectionColor) var(--pct),
+    rgba(15,23,42,0.15) var(--pct),
+    rgba(15,23,42,0.15) 100%);
+  border-radius: 999px;
+  outline: none;
+}
+
+/* WebKit thumb */
+input[type="range"]::-webkit-slider-thumb{
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  border: 1px solid rgba(15,23,42,0.18);
+  box-shadow: 0 10px 18px rgba(2,6,23,0.12);
+  background:
+    #ffffff
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24'><path fill='%230f172a' d='M20.8 3.2a2.4 2.4 0 0 0-3.4 0l-1.2 1.2l-2-2a1 1 0 0 0-1.4 0L11.4 4a1 1 0 0 0 0 1.4l2 2l-7.9 7.9a3 3 0 0 0 4.2 4.2l7.9-7.9l2 2a1 1 0 0 0 1.4 0l1.4-1.4a1 1 0 0 0 0-1.4l-2-2l1.2-1.2a2.4 2.4 0 0 0 0-3.4Z'/></svg>")
+    no-repeat center;
+  cursor: grab;
+}
+input[type="range"]::-webkit-slider-thumb:active{ cursor: grabbing; }
+
+/* Firefox thumb */
+input[type="range"]::-moz-range-thumb{
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  border: 1px solid rgba(15,23,42,0.18);
+  box-shadow: 0 10px 18px rgba(2,6,23,0.12);
+  background: #ffffff;
+}
+
+/* BALL selector: progress dots with cricket ball */
+.ballRow{
+  display:flex;
+  gap: 10px;
+  align-items:center;
+  flex-wrap: wrap;
+}
+
+.ballDot{
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid rgba(15,23,42,0.18);
+  background: #ffffff;
+  box-shadow: 0 8px 16px rgba(2,6,23,0.08);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size: 12px;
+  font-weight: 800;
+  color: rgba(15,23,42,0.65);
+  user-select:none;
+  cursor: pointer;
+  position:relative;
+}
+
+/* ball icon in the middle */
+.ballDot::before{
+  content:"";
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #dc2626;
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.45);
+  display:block;
+}
+
+/* show number under the ball */
+.ballDot span{
+  position:absolute;
+  bottom: -18px;
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+/* selected/progressed dots (1..selected) */
+.ballDot.active{
+  background: color-mix(in srgb, #dc2626 12%, #ffffff);
+  border-color: rgba(220,38,38,0.35);
+}
+.ballDot.active::before{
+  background: #b91c1c;
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.55);
+}
+
+/* Content below */
+.grid2{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+@media (max-width: 980px){
+  .grid2{ grid-template-columns: 1fr; }
+}
+
+.matchupCard{
+  padding: 16px 18px;
+  margin: 14px 0 10px 0;
+}
+
+.matchupTitle{
+  font-size: 26px;
+  font-weight: 800;
+  margin: 0 0 8px 0;
+}
+
+.matchupSubtitle{
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* Tables */
+.tableWrap{
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+table{
+  width:100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+thead th{
+  text-align:left;
+  padding: 14px 12px;
+  font-weight: 700;
+  color: rgba(15,23,42,0.62);
+  background: #fafbff;
+  border-bottom: 1px solid var(--border);
+}
+
+tbody td{
+  padding: 13px 12px;
+  border-top: 1px solid rgba(15,23,42,0.08);
+  color: rgba(15,23,42,0.92);
+}
+
+tbody tr:hover{
+  background: rgba(37,99,235,0.04);
+}
+
+.radialWrap {
+  position: relative;
+  border-radius: 16px;
+  padding: 12px 8px;
+}
+
+
+/* Error banner */
+.error{
+  border: 1px solid rgba(220,38,38,0.25);
+  background: rgba(220,38,38,0.06);
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin: 10px 0 10px 0;
+}
+
+.note{
+  font-size: 13px;
+  color: var(--muted);
+  padding: 12px 14px;
+}
